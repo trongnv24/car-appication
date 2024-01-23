@@ -8,6 +8,8 @@ import TranningjavaSpringboot.car.service.CarService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 import static TranningjavaSpringboot.car.service.mapping.CarMapping.convertDtoToEntity;
 import static TranningjavaSpringboot.car.service.mapping.CarMapping.convertEntityToUserResponse;
 
@@ -31,5 +33,18 @@ public class CarServiceImpl implements CarService  {
         log.info(" === Complete the new car creation apo . Car id ===",response.getId());
         return response;
 
+    }
+    @Override
+    public CarResponse getById(String id) {
+        log.info(" === Start api getById car");
+        log.info(" === String id:{} === ", id);
+        Optional<CarEntity> optionalCar = carRepository.findById(id);
+        if (!optionalCar.isPresent()) {
+            throw new RuntimeException();
+        }
+        CarEntity carEntity = optionalCar.get();
+        CarResponse response = convertEntityToUserResponse(carEntity);
+        log.info(" === Finish api getById car. Car id {} : === ",response.getId());
+        return response;
     }
 }

@@ -25,4 +25,13 @@ public class CarController {
         log.info("=== Finish api create car. Car id {} :  === ", response.getId()) ;
         return response;
     }
+    @GetMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public CarResponse getById ( @PathVariable("id") String id) {
+        log.info(" === Start api getById new car === ");
+        log.info(" === String id : {} === ", id);
+        CarResponse response = service.getById(id);
+        log.info(" === Finish api getById car. Car id {} : === ", response.getId()) ;
+        return response;
+    }
 }
