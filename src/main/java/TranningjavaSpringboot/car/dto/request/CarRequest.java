@@ -1,30 +1,13 @@
-package TranningjavaSpringboot.car.entity;
+package TranningjavaSpringboot.car.dto.request;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.Table;
-
-import java.util.Objects;
-import java.util.UUID;
-
-@Table(name="car")
-@Entity
-public class CarEntity  {
-
-    @Id
+public class CarRequest {
     private String id;
     private String brand;
     private int year;
     private String color;
     private double price;
 
-    @PrePersist
-    public void init() {
-        this.id = Objects.isNull(this.id) ? UUID.randomUUID().toString() : this.id;
-    }
-
-    public CarEntity() {
+    public CarRequest() {
     }
 
     public String getId() {
@@ -69,7 +52,7 @@ public class CarEntity  {
 
     @Override
     public String toString() {
-        return "CarEntity{" +
+        return "CarRequest{" +
                 "id='" + id + '\'' +
                 ", brand='" + brand + '\'' +
                 ", year=" + year +
