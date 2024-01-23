@@ -8,4 +8,5 @@ public interface CarService {
 
     CarResponse getById(String id);
 
+    CarResponse update ( CarRequest request , String id);
 }
