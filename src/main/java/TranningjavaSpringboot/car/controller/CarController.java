@@ -22,7 +22,7 @@ public class CarController {
         log.info("===Start api create new car ===");
         log.info("=== Request Body :{}", request);
         CarResponse response = service.create(request);
-        log.info("=== Finish api create car. Car id {} :  === ", response.getId()) ;
+        log.info("=== Finish api new create car. Car id {} :  === ", response.getId()) ;
         return response;
     }
     @GetMapping("{id}")
@@ -32,6 +32,15 @@ public class CarController {
         log.info(" === String id : {} === ", id);
         CarResponse response = service.getById(id);
         log.info(" === Finish api getById car. Car id {} : === ", response.getId()) ;
+        return response;
+    }
+    @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public CarResponse update (@RequestBody CarRequest request, @PathVariable("id") String id) {
+        log.info("=== Start api update car === ");
+        log.info(" === Request Body {} :" , request);
+        CarResponse response = service.update(request,id);
+        log.info("=== Finish api update car . Car id {} :", response.getId());
         return response;
     }
 }

@@ -47,4 +47,22 @@ public class CarServiceImpl implements CarService  {
         log.info(" === Finish api getById car. Car id {} : === ",response.getId());
         return response;
     }
+    @Override
+    public CarResponse update (CarRequest request , String id) {
+        log.info(" === Start api update car === ");
+        log.info(" === Request Body {} :, String id {}: ", request ,id);
+        Optional<CarEntity> optionalCar = carRepository.findById(id);
+        if(!optionalCar.isPresent()) {
+            throw  new RuntimeException();
+        }
+        CarEntity carEntity = optionalCar.get();
+        carEntity.setBrand(request.getBrand());
+        carEntity.setYear(request.getYear());
+        carEntity.setColor(request.getColor());
+        carEntity.setPrice(request.getPrice());
+        carEntity = carRepository.save(carEntity);
+        CarResponse response = convertEntityToUserResponse(carEntity);
+        log.info(" === Finish api update car. Car id {}: ", response.getId());
+        return response;
+    }
 }
