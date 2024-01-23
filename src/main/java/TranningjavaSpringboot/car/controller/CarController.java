@@ -38,9 +38,17 @@ public class CarController {
     @ResponseStatus(HttpStatus.OK)
     public CarResponse update (@RequestBody CarRequest request, @PathVariable("id") String id) {
         log.info("=== Start api update car === ");
-        log.info(" === Request Body {} :" , request);
+        log.info(" === Request Body {} :, String id {} : ===" , request, id);
         CarResponse response = service.update(request,id);
-        log.info("=== Finish api update car . Car id {} :", response.getId());
+        log.info("=== Finish api update car . Car id {} : === ", response.getId());
         return response;
+    }
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteById (@PathVariable("id") String id) {
+        log.info("=== Start api update cart === ");
+        log.info("=== String id {}:  ==== ", id);
+        log.info("=== Finish api delete car . Car id {} : === ");
+        service.deleteById(id);
     }
 }
